@@ -8,18 +8,18 @@ const getAllMovies = async (req, res) => {
 }
 
 
-const getSingleMovie = async (req, res) => {
+const getSingleMovie = async (req, res, next) => {
     try {
         const movie = await Movie.findById(req.params.id)
         res.json({ 'movie': movie })
     } catch (error) {
-        throw new Error()
+        next(error)
     }
 
 }
 
 
-const createMovie = async (req, res) => {
+const createMovie = async (req, res, next) => {
     const { Title, Year, Rated, Released, Runtime, Genre, Director, Writer, Actors, Plot, Language, Country, Awards, Type } = req.body
     try {
         const movie = await Movie.create({
@@ -29,13 +29,12 @@ const createMovie = async (req, res) => {
         const saveMovie = movie.save()
         res.json({ 'movie': movie })
     } catch (error) {
-        // throw new Error('Movie not created successfully')
-        console.log(error);
+        next(error)
     }
 
 }
 
-const updateMovie = async (req, res) => {
+const updateMovie = async (req, res, next) => {
     const { Title, Year, Rated, Released, Runtime, Genre, Director, Writer, Actors, Plot, Language, Country, Awards, Type } = req.body
     try {
         const movie = await Movie.findByIdAndUpdate(req.params.id, {
@@ -43,12 +42,12 @@ const updateMovie = async (req, res) => {
         })
         res.json({ 'movie': movie })
     } catch (error) {
-
+        next(error)
     }
 
 }
-const deleteMovie = () => {
-    const movie = Movie.findByIdAndDelete(req.params.id)
+const deleteMovie = async (req, res) => {
+    const movie = await Movie.findByIdAndDelete(req.params.id)
     res.json({ 'msg': movie })
 }
 export {
