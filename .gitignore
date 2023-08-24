@@ -1,2 +1,3 @@
-nodemon
+node_modules
 .env
+package.lock.yaml
