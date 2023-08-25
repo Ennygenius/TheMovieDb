@@ -15,7 +15,7 @@ const port = process.env.PORT || 8000
 app.use(cors())
 app.use(express.json())
 
-app.use('/api/v1/movies', movieRouter)
+app.use('', movieRouter)
 app.post('/api/uploads', uploads.single("image"), (req, res, next) => {
     console.log(req.file, req.body);
     res.send(req.file)
