@@ -13,7 +13,7 @@ const getSingleMovie = async (req, res, next) => {
         const movie = await Movie.findById(req.params.id)
         res.json({ 'movie': movie })
     } catch (error) {
-        next(error)
+        console.log(error)
     }
 
 }
@@ -29,7 +29,7 @@ const createMovie = async (req, res, next) => {
         const saveMovie = movie.save()
         res.json({ 'movie': movie })
     } catch (error) {
-        next(error)
+        console.log(error)
     }
 
 }
@@ -42,7 +42,7 @@ const updateMovie = async (req, res, next) => {
         })
         res.json({ 'movie': movie })
     } catch (error) {
-        next(error)
+        console.log(error)
     }
 
 }
